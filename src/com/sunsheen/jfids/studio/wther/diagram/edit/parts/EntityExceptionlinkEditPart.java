@@ -1,6 +1,7 @@
 package com.sunsheen.jfids.studio.wther.diagram.edit.parts;
 
 import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
@@ -65,11 +66,13 @@ public class EntityExceptionlinkEditPart extends ConnectionNodeEditPart implemen
 	public class ExceptionLinkFigure extends PolylineConnectionEx {
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public ExceptionLinkFigure() {
+			System.err.println("EntityExceptionlinkEditPart.ExceptionLinkFigure.ExceptionLinkFigure()->!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			this.setLineWidth(2);
+			this.setLineStyle(Graphics.LINE_DASHDOT);
 			this.setForegroundColor(THIS_FORE);
-
 			setTargetDecoration(createTargetDecoration());
 		}
 
@@ -86,6 +89,6 @@ public class EntityExceptionlinkEditPart extends ConnectionNodeEditPart implemen
 	/**
 	 * @generated NOT
 	 */
-	static final Color THIS_FORE = SWTResourceManager.getColor(SWT.COLOR_RED);
+	static final Color THIS_FORE = SWTResourceManager.getColor(99, 161, 0);
 
 }

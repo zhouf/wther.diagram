@@ -64,9 +64,13 @@ import com.sunsheen.jfids.studio.logic.Flow;
 import com.sunsheen.jfids.studio.logic.LogicFactory;
 import com.sunsheen.jfids.studio.wther.diagram.edit.parts.AssignmentEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.parts.BlankEditPart;
+import com.sunsheen.jfids.studio.wther.diagram.edit.parts.CallEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.parts.EndEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.parts.FlowEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.parts.StartEditPart;
+import com.sunsheen.jfids.studio.wther.diagram.edit.parts.TransactionEditPart;
+import com.sunsheen.jfids.studio.wther.diagram.edit.parts.TranscommitEditPart;
+import com.sunsheen.jfids.studio.wther.diagram.edit.parts.TransrollbackEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.util.LineNumUtil;
 import com.sunsheen.jfids.studio.wther.diagram.providers.LogicElementTypes;
 
@@ -176,6 +180,8 @@ public class LogicDiagramEditorUtil {
 				model.setBaseLineNum(lineNum);
 
 				attachModelToResource(model, diagramResource);
+				Diagram diagram = ViewService.createDiagram(model, FlowEditPart.MODEL_ID, LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				
 
 				//添加初始化设置
 				com.sunsheen.jfids.studio.logic.Start startNode = LogicFactory.eINSTANCE.createStart();
@@ -183,56 +189,39 @@ public class LogicDiagramEditorUtil {
 				startNode.setLineNum(0);
 				model.getNodes().add(startNode);
 				
-				com.sunsheen.jfids.studio.logic.End endNode = LogicFactory.eINSTANCE.createEnd();
-				endNode.setName("结束");
-				endNode.setLineNum(-1);
-				model.getNodes().add(endNode);
-				
-				
 				com.sunsheen.jfids.studio.logic.Blank blankNode = LogicFactory.eINSTANCE.createBlank();
-				blankNode.setName("运算");
+				blankNode.setName("数据源");
 				blankNode.setLineNum(1);
 				model.getNodes().add(blankNode);
-				
+
 				com.sunsheen.jfids.studio.logic.Assignment assNode = LogicFactory.eINSTANCE.createAssignment();
-				assNode.setName("模型");
+				assNode.setName("业务描述");
 				assNode.setLineNum(2);
 				model.getNodes().add(assNode);
+				
+				com.sunsheen.jfids.studio.logic.Call callNode = LogicFactory.eINSTANCE.createCall();
+				callNode.setName("算法适配");
+				callNode.setLineNum(3);
+				model.getNodes().add(callNode);
+				
+				
 				
 				//link
 				startNode.getLink().add(blankNode);
 				blankNode.getLink().add(assNode);
-				assNode.getLink().add(endNode);
-
-				Diagram diagram = ViewService.createDiagram(model, FlowEditPart.MODEL_ID, LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
-
-				Node nodeStart = (Node) ViewService.createNode(diagram, startNode, LogicVisualIDRegistry.getType(StartEditPart.VISUAL_ID),
-						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
-				Bounds boundsStart = NotationFactory.eINSTANCE.createBounds();
-				boundsStart.setX(100);
-				boundsStart.setY(100);
-				nodeStart.setLayoutConstraint(boundsStart);
-
-				Node nodeEnd = (Node) ViewService.createNode(diagram, endNode, LogicVisualIDRegistry.getType(EndEditPart.VISUAL_ID),
-						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
-				Bounds boundsEnd = NotationFactory.eINSTANCE.createBounds();
-				boundsEnd.setX(500);
-				boundsEnd.setY(100);
-				nodeEnd.setLayoutConstraint(boundsEnd);
+				assNode.getLink().add(callNode);
+				for(int i = 0;i<4;i++){
+					com.sunsheen.jfids.studio.logic.Transaction transactionNode = createBranch(model, diagram,i);
+					callNode.getLink().add(transactionNode);
+				}
 				
-				Node nodeBlank = ViewService.createNode(diagram, blankNode, LogicVisualIDRegistry.getType(BlankEditPart.VISUAL_ID),
-						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
-				Bounds boundsBlank = NotationFactory.eINSTANCE.createBounds();
-				boundsBlank.setX(300);
-				boundsBlank.setY(100);
-				nodeBlank.setLayoutConstraint(boundsBlank);
+
+				createStartNode(startNode, diagram);//开始节点
+				createBlankNode(blankNode, diagram);//数据源
+				createAssignmentNode(assNode, diagram);//业务描述
+				createCallNode(callNode, diagram);//算法适配
+
 				
-				Node nodeAss = ViewService.createNode(diagram, assNode, LogicVisualIDRegistry.getType(AssignmentEditPart.VISUAL_ID),
-						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
-				Bounds boundsAssignment = NotationFactory.eINSTANCE.createBounds();
-				boundsAssignment.setX(300);
-				boundsAssignment.setY(200);
-				nodeAss.setLayoutConstraint(boundsAssignment);
 				
 				//end of modify
 
@@ -250,6 +239,87 @@ public class LogicDiagramEditorUtil {
 					LogicDiagramEditorPlugin.getInstance().logError("Unable to store model and diagram resources", e); //$NON-NLS-1$
 				}
 				return CommandResult.newOKCommandResult();
+			}
+
+			/**
+			 * 创建一个分支
+			 * @param model
+			 * @param diagram
+			 * @param i 标记第几个分支
+			 * @return
+			 */
+			private com.sunsheen.jfids.studio.logic.Transaction createBranch(Flow model, Diagram diagram,int i) {
+				int yLocation = 100+i*100;
+				com.sunsheen.jfids.studio.logic.Transaction transactionNode = LogicFactory.eINSTANCE.createTransaction();
+				transactionNode.setName("计算监视");
+				transactionNode.setLineNum(1);
+				model.getNodes().add(transactionNode);
+				
+				com.sunsheen.jfids.studio.logic.Transcommit commitNode = LogicFactory.eINSTANCE.createTranscommit();
+				commitNode.setName("可视化");
+				commitNode.setLineNum(1);
+				model.getNodes().add(commitNode);
+				
+				com.sunsheen.jfids.studio.logic.Transrollback rollbackNode = LogicFactory.eINSTANCE.createTransrollback();
+				rollbackNode.setName("报表");
+				rollbackNode.setLineNum(1);
+				model.getNodes().add(rollbackNode);
+				
+//				com.sunsheen.jfids.studio.logic.End endNode = LogicFactory.eINSTANCE.createEnd();
+//				endNode.setName("结束");
+//				endNode.setLineNum(-1);
+//				model.getNodes().add(endNode);
+				
+				transactionNode.setExceptionlink(commitNode);
+				commitNode.setExceptionlink(rollbackNode);
+				
+				Node nodeTransaction = (Node) ViewService.createNode(diagram, transactionNode, LogicVisualIDRegistry.getType(TransactionEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				location(nodeTransaction, 200, yLocation);
+				
+				Node nodeCommit = (Node) ViewService.createNode(diagram, commitNode, LogicVisualIDRegistry.getType(TranscommitEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				location(nodeCommit, 300, yLocation);
+				
+				Node nodeRollback = (Node) ViewService.createNode(diagram, rollbackNode, LogicVisualIDRegistry.getType(TransrollbackEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				location(nodeRollback, 400, yLocation);
+				
+//				Node nodeEnd = (Node) ViewService.createNode(diagram, endNode, LogicVisualIDRegistry.getType(EndEditPart.VISUAL_ID),
+//						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+//				location(nodeEnd, 500, yLocation);
+				
+				return transactionNode;
+			}
+
+			private void createCallNode(com.sunsheen.jfids.studio.logic.Call callNode, Diagram diagram) {
+				Node node = ViewService.createNode(diagram, callNode, LogicVisualIDRegistry.getType(CallEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				location(node,50,350);
+			}
+			private void createAssignmentNode(com.sunsheen.jfids.studio.logic.Assignment assNode, Diagram diagram) {
+				Node node = ViewService.createNode(diagram, assNode, LogicVisualIDRegistry.getType(AssignmentEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				location(node,50,250);
+			}
+
+			private void createBlankNode(com.sunsheen.jfids.studio.logic.Blank blankNode, Diagram diagram) {
+				Node node = ViewService.createNode(diagram, blankNode, LogicVisualIDRegistry.getType(BlankEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				location(node,50,150);
+			}
+
+			private void createStartNode(com.sunsheen.jfids.studio.logic.Start startNode, Diagram diagram) {
+				Node node = (Node) ViewService.createNode(diagram, startNode, LogicVisualIDRegistry.getType(StartEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				location(node,50,50);
+			}
+
+			private void location(Node nodeStart,int x,int y) {
+				Bounds boundsStart = NotationFactory.eINSTANCE.createBounds();
+				boundsStart.setX(x);
+				boundsStart.setY(y);
+				nodeStart.setLayoutConstraint(boundsStart);
 			}
 		};
 		try {

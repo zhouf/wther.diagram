@@ -71,7 +71,6 @@ public class ForEndlinkEditPart extends ConnectionNodeEditPart implements ITreeB
 			this.setLineWidth(2);
 			this.setLineStyle(Graphics.LINE_DASHDOT);
 			this.setForegroundColor(THIS_FORE);
-
 			setTargetDecoration(createTargetDecoration());
 		}
 
