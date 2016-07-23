@@ -961,11 +961,12 @@
          class="com.sunsheen.jfids.studio.wther.diagram.creation.NewWeatherAction"
          index="1">
    </action>
-
+	<!--
    <action
          class="com.sunsheen.jfids.studio.wther.diagram.creation.NewBixAction"
          index="1">
    </action>
+   -->
 </extension>
 
 

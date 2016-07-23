@@ -151,7 +151,8 @@ public class LogicDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	 */
 	protected PaletteRoot createPaletteRoot(PaletteRoot existingPaletteRoot) {
 		PaletteRoot root = super.createPaletteRoot(existingPaletteRoot);
-		new LogicPaletteFactory().fillPalette(root);
+		//new LogicPaletteFactory().fillPalette(root);
+		root.setVisible(false);
 		return root;
 	}
 

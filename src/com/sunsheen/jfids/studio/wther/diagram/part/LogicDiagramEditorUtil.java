@@ -31,17 +31,23 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewAndElementRequest;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+import org.eclipse.gmf.runtime.emf.type.core.IHintedType;
+import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
@@ -56,10 +62,13 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import com.sunsheen.jfids.studio.logic.Flow;
 import com.sunsheen.jfids.studio.logic.LogicFactory;
+import com.sunsheen.jfids.studio.wther.diagram.edit.parts.AssignmentEditPart;
+import com.sunsheen.jfids.studio.wther.diagram.edit.parts.BlankEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.parts.EndEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.parts.FlowEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.parts.StartEditPart;
 import com.sunsheen.jfids.studio.wther.diagram.edit.util.LineNumUtil;
+import com.sunsheen.jfids.studio.wther.diagram.providers.LogicElementTypes;
 
 /**
  * @generated
@@ -173,31 +182,57 @@ public class LogicDiagramEditorUtil {
 				startNode.setName("开始");
 				startNode.setLineNum(0);
 				model.getNodes().add(startNode);
+				
 				com.sunsheen.jfids.studio.logic.End endNode = LogicFactory.eINSTANCE.createEnd();
 				endNode.setName("结束");
 				endNode.setLineNum(-1);
 				model.getNodes().add(endNode);
+				
+				
+				com.sunsheen.jfids.studio.logic.Blank blankNode = LogicFactory.eINSTANCE.createBlank();
+				blankNode.setName("运算");
+				blankNode.setLineNum(1);
+				model.getNodes().add(blankNode);
+				
+				com.sunsheen.jfids.studio.logic.Assignment assNode = LogicFactory.eINSTANCE.createAssignment();
+				assNode.setName("模型");
+				assNode.setLineNum(2);
+				model.getNodes().add(assNode);
+				
+				//link
+				startNode.getLink().add(blankNode);
+				blankNode.getLink().add(assNode);
+				assNode.getLink().add(endNode);
 
-				Diagram diagram = ViewService.createDiagram(model, FlowEditPart.MODEL_ID,
-						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				Diagram diagram = ViewService.createDiagram(model, FlowEditPart.MODEL_ID, LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 
-				Node nodeStart = (Node) ViewService.createNode(diagram, startNode,
-						LogicVisualIDRegistry.getType(StartEditPart.VISUAL_ID),
+				Node nodeStart = (Node) ViewService.createNode(diagram, startNode, LogicVisualIDRegistry.getType(StartEditPart.VISUAL_ID),
 						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				Bounds boundsStart = NotationFactory.eINSTANCE.createBounds();
 				boundsStart.setX(100);
 				boundsStart.setY(100);
 				nodeStart.setLayoutConstraint(boundsStart);
 
-				Node nodeEnd = (Node) ViewService.createNode(diagram, endNode,
-						LogicVisualIDRegistry.getType(EndEditPart.VISUAL_ID),
+				Node nodeEnd = (Node) ViewService.createNode(diagram, endNode, LogicVisualIDRegistry.getType(EndEditPart.VISUAL_ID),
 						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				Bounds boundsEnd = NotationFactory.eINSTANCE.createBounds();
 				boundsEnd.setX(500);
 				boundsEnd.setY(100);
 				nodeEnd.setLayoutConstraint(boundsEnd);
 				
-				ViewService.createEdge(nodeStart, nodeStart, "com.sunsheen.jfids.studio.wther.diagram.NodeLink_4001", LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				Node nodeBlank = ViewService.createNode(diagram, blankNode, LogicVisualIDRegistry.getType(BlankEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				Bounds boundsBlank = NotationFactory.eINSTANCE.createBounds();
+				boundsBlank.setX(300);
+				boundsBlank.setY(100);
+				nodeBlank.setLayoutConstraint(boundsBlank);
+				
+				Node nodeAss = ViewService.createNode(diagram, assNode, LogicVisualIDRegistry.getType(AssignmentEditPart.VISUAL_ID),
+						LogicDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				Bounds boundsAssignment = NotationFactory.eINSTANCE.createBounds();
+				boundsAssignment.setX(300);
+				boundsAssignment.setY(200);
+				nodeAss.setLayoutConstraint(boundsAssignment);
 				
 				//end of modify
 
@@ -209,8 +244,7 @@ public class LogicDiagramEditorUtil {
 
 				try {
 
-					diagramResource.save(com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorUtil
-							.getSaveOptions());
+					diagramResource.save(com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorUtil.getSaveOptions());
 				} catch (IOException e) {
 
 					LogicDiagramEditorPlugin.getInstance().logError("Unable to store model and diagram resources", e); //$NON-NLS-1$
@@ -219,8 +253,9 @@ public class LogicDiagramEditorUtil {
 			}
 		};
 		try {
-			OperationHistoryFactory.getOperationHistory().execute(command, new SubProgressMonitor(progressMonitor, 1),
-					null);
+			OperationHistoryFactory.getOperationHistory().execute(command, new SubProgressMonitor(progressMonitor, 1),null);
+			
+			
 		} catch (ExecutionException e) {
 			LogicDiagramEditorPlugin.getInstance().logError("Unable to create model and diagram", e); //$NON-NLS-1$
 		}

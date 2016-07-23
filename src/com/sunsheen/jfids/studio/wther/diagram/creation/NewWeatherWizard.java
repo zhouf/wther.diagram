@@ -1,7 +1,7 @@
 package com.sunsheen.jfids.studio.wther.diagram.creation;
 
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -14,12 +14,10 @@ import org.eclipse.ui.PartInitException;
 
 import com.sunsheen.jfids.studio.dialog.compoments.listeners.ValidateStatus;
 import com.sunsheen.jfids.studio.logging.Log;
-import com.sunsheen.jfids.studio.run.Constants;
 import com.sunsheen.jfids.studio.run.ui.RunMessages;
 import com.sunsheen.jfids.studio.run.ui.node.BixPackageNode;
 import com.sunsheen.jfids.studio.run.ui.wizards.creation.BaseNewResourceWizard;
 import com.sunsheen.jfids.studio.run.ui.wizards.creation.BaseNewWizardPage.NewResourceValidater;
-import com.sunsheen.jfids.studio.run.ui.wizards.creation.SimpleNewWizardPage;
 import com.sunsheen.jfids.studio.run.utils.ProjectPathUtils;
 import com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorUtil;
 
