@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabFolder title="判断节点配置" message="判断节点详细配置信息"
+	titleImg="icons/titleImg.png"
+	onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.IfDlgListener" validate="com.sunsheen.jfids.studio.wther.diagram.dialog.validator.IfDlgValidator">
+<button id="0" name="确定"></button>
+<button id="1" name="取消"></button>
+	<tab name="设置" cols="1">
+		<table id="table" title="变量定义：" contentProvider="config.ContentProvider" key="table">
+		  <toolbar name="扩展工具栏">
+		  		<toolbaritem name="bar_up" key="upExpandItemKey" toolTipText="上移" group="0"
+					icons="icons/up.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.ExpandTableUpListener"></toolbaritem>
+				<toolbaritem name="bar_down" key="delExpandItemKey"  toolTipText="下移" group="0"
+					icons="icons/down.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.ExpandTableDownListener"></toolbaritem>
+		   </toolbar>
+		    <head>
+	           
+	           <td index="0" width="210" edit="true" name="title1" title="连线名称" render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.IfTextCellRenderer"/>
+	           <td index="1" width="300" edit="true"  name="title2" title="条件" render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.IfTextCellRenderer" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.ConditionTextCellEditor"/>
+	           <!-- 
+	           <td index="2" width="0" edit="false"  name="title2" title="UUID"/>
+	           <td index="1" width="150" edit="true"  name="title2" title="条件"/>
+	           <td index="2" width="100" edit="true"  name="title2" title="数据"/>
+	           <td index="3" width="220"  name="title2" title="描述"/>
+	            -->
+		    </head>
+		</table>
+	</tab>
+	
+	<tab name="描述" icon="icons/computer.png">
+		<label text="节点名">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL"/>
+		</label>
+		<text key="nodename">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true"/>
+		</text>
+		<label text="描述">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="VERTICAL_ALIGN_END"/>
+		</label>
+		<text key="comment" multi="true" linefeed="auto">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"/>
+		</text>
+	</tab>
+</tabFolder>

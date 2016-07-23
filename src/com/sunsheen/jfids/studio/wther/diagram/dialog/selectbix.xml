@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabFolder title="业务逻辑流选择" message="选择业务逻辑流信息" width="600" height="450"
+	titleImg="icons/titleImg.png"
+	onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.SelectBixOKListener" resize="true">
+<button id="0" name="确定"></button>
+<button id="1" name="取消"></button>
+	<tab name="业务逻辑流选择" icon="icons/computer.png" cols="1">
+		<label text="通配符(?=任意字符,*= 任意字符串):" >
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" />
+		</label>
+		<text key="fileName" onChange="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.TypeOnChange">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" grabExcessHorizontalSpace="true" horizontalSpan="2"/>
+		</text>
+		<label text="匹配结果:">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" />
+		</label>
+		<select key="show" onSelected="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.OnSelected" DBClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.DBClick">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"/>
+		</select>
+		<label text="" key="showText">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" />
+		</label>
+	</tab>
+
+</tabFolder>

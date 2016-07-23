@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabFolder title="业务逻辑流配置" message="业务逻辑流配置详细信息" height="660" 
+	titleImg="icons/titleImg.png"
+	onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.FlowDlgListener" resize="true"
+	validate="com.sunsheen.jfids.studio.wther.diagram.dialog.validator.FlowDlgValidator">
+<button id="0" name="确定"></button>
+<button id="1" name="取消"></button>
+	<tab name="变量设置" icon="icons/computer.png" cols="1">
+		<table title="变量定义" key="defTable" mergeHead="false" >
+			<toolbar name="扩展工具栏">
+				<toolbaritem name="bar_add" key="addVarItem" toolTipText="添加一行" group="0"
+					icons="icons/add_correction.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.ExpandTableAddListener"></toolbaritem>
+				<toolbaritem name="bar_del" key="delVarItem" toolTipText="删除一行" group="0"
+					icons="icons/remove_correction.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.ExpandTableDeleteListener"></toolbaritem>
+			</toolbar>
+			<head>
+				<td index="0" width="200"  name="title1" title="变量名" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.DefineTextCellEditor" render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.VarNameTextCellRenderer"/>
+				<!-- td index="0" width="200"  name="title1" title="变量名"/ -->
+				<td index="1" width="200" name="title2" title="变量初值" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.DefineTextCellEditor"/>
+				<td index="2" width="80" name="title3" title="类型" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.VarTypeComboBoxCellEditor" render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.JavaTypeTextCellRenderer"/>
+				<td index="3" width="50" name="title4" title="数组" 
+					cellEditor="com.sunsheen.jfids.studio.dialog.agilegrid.editors.CheckboxCellEditor"
+					render="com.sunsheen.jfids.studio.dialog.agilegrid.renderers.CheckboxCellRenderer"/>
+			</head>
+		</table>
+		<table  title="参数/返回值设置" key="argTable" mergeHead="true" >
+			<toolbar name="扩展工具栏">
+				<toolbaritem name="arg_add" key="addArgItemKey" toolTipText="添加一行参数" group="0"
+					icons="icons/var_add.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.FlowArgTableAddListener"></toolbaritem>
+				<toolbaritem name="ret_add" key="addReturnItemKey" toolTipText="添加一行返回" group="0"
+					icons="icons/ret_add.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.FlowArgTableAddListener"></toolbaritem>
+				<toolbaritem name="bar_up" key="moveUp" toolTipText="上移" group="0"
+					icons="icons/up.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.ArgUpDownListener"></toolbaritem>
+				<toolbaritem name="bar_down" key="moveDown"  toolTipText="下移" group="0"
+					icons="icons/down.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.ArgUpDownListener"></toolbaritem>
+				<toolbaritem name="ret_del" key="delReturnItemKey"  toolTipText="删除选中行" group="0"
+					icons="icons/remove_correction.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.FlowArgTableDeleteListener"></toolbaritem>
+			</toolbar>
+			<head>
+	        	<td index="0" width="70" edit="false" name="title1" title="分类"  render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.FlowTextCellRenderer"/>
+				<td index="1" width="130"  name="title1" title="变量名" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.FlowRetTextCellEditor" render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.FlowTextCellRenderer"/>
+				<td index="2" width="80" name="title2" title="变量类型" 
+					cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.VarTypeComboBoxCellEditor" 
+					render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.JavaTypeTextCellRenderer"/>
+					
+				<td index="3" width="50" name="title2" title="数组" 
+					cellEditor="com.sunsheen.jfids.studio.dialog.agilegrid.editors.CheckboxCellEditor"
+					render="com.sunsheen.jfids.studio.dialog.agilegrid.renderers.CheckboxCellRenderer"/>
+					
+				<!-- td index="4" width="70" name="title3" title="值类型" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.ValueTypeComboBoxCellEditor"/ -->
+				<td index="4" width="200" name="title2" title="描述" />
+			</head>
+			
+		</table>
+		<!-- 
+		<label text="返回值设置">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL"/>
+		</label>
+		<text key="retstr">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" 
+				grabExcessHorizontalSpace="false"/>
+		</text>
+		 -->
+		
+		<checkbox text="页面可调用" key="canbeinvoked">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL"/>
+		</checkbox>
+
+	</tab>
+	
+	<!-- 
+	<tab name="全局变量" icon="icons/computer.png" cols="1">
+		<table  title="变量定义" key="glbTable" mergeHead="false" >
+			<toolbar name="扩展工具栏">
+				<toolbaritem name="bar_add" key="addGlobalItem" toolTipText="添加一行" group="0"
+					icons="icons/add_correction.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.ExpandTableAddListener"></toolbaritem>
+				<toolbaritem name="bar_del" key="delGlobalItem" toolTipText="删除一行" group="0"
+					icons="icons/remove_correction.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.ExpandTableDeleteListener"></toolbaritem>
+			</toolbar>
+			
+			<head>
+				<td index="0" width="210" name="title1" title="变量名" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.DefineTextCellEditor" render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.VarNameTextCellRenderer"/>
+				<td index="1" width="200" name="title2" title="变量初值" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.DefineTextCellEditor"/>
+				<td index="2" width="100" name="title3" title="值类型" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.VarTypeComboBoxCellEditor"/>
+			</head>
+			
+		</table>
+	</tab>
+	 -->
+	 
+	<tab name="描述" icon="icons/computer.png">
+		<!-- 
+		<label text="名字">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL"/>
+		</label>
+		<text key="flowname">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true"/>
+		</text>
+	 	-->
+		<label text="作者">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="VERTICAL_ALIGN_END"/>
+		</label>
+		<text key="author">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL"
+				grabExcessHorizontalSpace="true"/>
+		</text>
+		<label text="创建时间">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="VERTICAL_ALIGN_END"/>
+		</label>
+		<text key="createtime">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL"
+				grabExcessHorizontalSpace="true"/>
+		</text>
+		<label text="描述">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="VERTICAL_ALIGN_END"/>
+		</label>
+		<text key="comment" multi="true" linefeed="auto">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"/>
+		</text>
+	</tab>
+
+</tabFolder>

@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
+      <?gmfgen generated="true"?>
+      <fileTypes type="text" extension="wth"/>
+   </extension>
+   
+   <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
+      <?gmfgen generated="true"?>
+      <parser
+         type="wth"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors" id="gmf-editor">
+      <?gmfgen generated="false"?>
+      <editor
+         id="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/bix.png"
+         extensions="wth"
+         default="true"
+         class="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditor"
+         matchingStrategy="com.sunsheen.jfids.studio.wther.diagram.part.LogicMatchingStrategy"
+         contributorClass="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts" id="ui-context">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="com.sunsheen.jfids.studio.wther.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="false"?>
+      <objectContribution
+            id="com.sunsheen.jfids.studio.wther.diagram.InitDiagram"
+            nameFilter="*.logic"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="com.sunsheen.jfids.studio.wther.diagram.part.LogicInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="com.sunsheen.jfids.studio.wther.diagram.InitDiagramAction">
+         </action>
+         
+      </objectContribution>
+      <!--以下为资源管理器右键菜单-->
+     
+     
+      <objectContribution
+            adaptable="false"
+            id="com.sunsheen.jfids.studio.wther.diagram.setTry"
+            objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart">
+         <action
+               class="com.sunsheen.jfids.studio.wther.diagram.part.SetTryAction"
+               id="com.sunsheen.jfids.studio.wther.diagram.enableTryAction"
+               label="设置异常捕获">
+         </action>
+         <action
+               class="com.sunsheen.jfids.studio.wther.diagram.part.SetTryAction"
+               id="com.sunsheen.jfids.studio.wther.diagram.disableTryAction"
+               label="取消异常捕获">
+         </action>
+      </objectContribution>
+        <!--以上为资源管理器右键菜单-->
+   </extension>
+   
+   <!--
+   <extension point="org.eclipse.ui.newWizards">
+		<wizard category="com.sunsheen.jfids.studio.web"
+			class="com.sunsheen.jfids.studio.wther.diagram.creation.NewWeatherAction" 
+			icon="icons/obj16/businesslogicdir.png" id="com.sunsheen.jfids.studio.web.wizard.new.bixcomposite" 
+			name="创建微应用">
+			<description>
+				新建一个业务逻辑
+			</description>
+		</wizard>
+		<wizard category="com.sunsheen.jfids.studio.web/child02" 
+			class="com.sunsheen.jfids.studio.wther.diagram.creation.NewBixWizard"
+			icon="icons/obj16/bix.png" 
+			id="com.sunsheen.jfids.studio.web.wizard.new.bixfile" name="业务逻辑流222">
+			<description>
+				新建一个新建业务逻辑流
+			</description>
+		</wizard>
+	</extension>
+	--> 
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <?gmfgen generated="false"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="LogicPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="save">
+               </GlobalActionId>
+            </ElementType>        
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="LogicPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      
+      <GlobalActionHandlerProvider
+            class="com.sunsheen.jfids.studio.wther.diagram.providers.BixGlobalActionHandlerProvider"
+            id="LogicRender">
+         <Priority name="Lowest"/>
+         <ViewId id="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      
+      <!--
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="LogicRender">
+         <Priority name="Lowest"/>
+         <ViewId id="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      -->
+   </extension>
+
+
+   <extension point="org.eclipse.core.runtime.preferences" id="prefs">
+      <?gmfgen generated="true"?>
+      <initializer class="com.sunsheen.jfids.studio.wther.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages" id="prefpages">
+      <?gmfgen generated="false"?>
+      <page
+            category="com.sunsheen.jfids.studio.preferences"
+            class="com.sunsheen.jfids.studio.wther.diagram.preferences.DiagramGeneralPreferencePage"
+            id="com.sunsheen.jfids.studio.wther.diagram.general"
+            name="%prefpage.com.sunsheen.jfids.studio.wther.diagram.general">
+      </page>
+      <page
+            id="com.sunsheen.jfids.studio.wther.diagram.appearance"
+            name="%prefpage.com.sunsheen.jfids.studio.wther.diagram.appearance"
+            category="com.sunsheen.jfids.studio.wther.diagram.general"
+            class="com.sunsheen.jfids.studio.wther.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="com.sunsheen.jfids.studio.wther.diagram.connections"
+            name="%prefpage.com.sunsheen.jfids.studio.wther.diagram.connections"
+            category="com.sunsheen.jfids.studio.wther.diagram.general"
+            class="com.sunsheen.jfids.studio.wther.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="com.sunsheen.jfids.studio.wther.diagram.printing"
+            name="%prefpage.com.sunsheen.jfids.studio.wther.diagram.printing"
+            category="com.sunsheen.jfids.studio.wther.diagram.general"
+            class="com.sunsheen.jfids.studio.wther.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="com.sunsheen.jfids.studio.wther.diagram.rulersAndGrid"
+            name="%prefpage.com.sunsheen.jfids.studio.wther.diagram.rulersAndGrid"
+            category="com.sunsheen.jfids.studio.wther.diagram.general"
+            class="com.sunsheen.jfids.studio.wther.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="com.sunsheen.jfids.studio.wther.diagram"
+            labelProvider="com.sunsheen.jfids.studio.wther.diagram.sheet.LogicSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="com.sunsheen.jfids.studio.wther.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="com.sunsheen.jfids.studio.wther.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="com.sunsheen.jfids.studio.wther.diagram.sheet.LogicPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
+      <?gmfgen generated="true"?>
+      <viewProvider class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Logic"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2011,2007,2004,2005,2006,2012,2008,2009,2010"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4007,4002,4003,4006,4004"/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicEditPartProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
+            <method name="getType()" value="Logic"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
+            <method name="getType()" value="2001,2002,2003,2011,2007,2004,2005,2006,2012,2008,2009,2010"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
+            <method name="getType()" value="4001,4007,4002,4003,4006,4004"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
+            <method name="getType()" value="5001,5002,5003,5011,5007,5004,5005,5006,5012,5008,5009,5010"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
+            <method name="getType()" value=""/>
+         </object>
+         <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
+      </editpartProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicModelingAssistantProvider">
+         <Priority name="Lowest"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.FlowEditPart" id="Flow_1000"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.StartEditPart" id="Start_2001"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.EndEditPart" id="End_2002"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.AssignmentEditPart" id="Assignment_2003"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.CustomEditPart" id="Custom_2011"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.BlankEditPart" id="Blank_2007"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.ForEditPart" id="For_2004"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.IfEditPart" id="If_2005"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.CallEditPart" id="Call_2006"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.BixrefEditPart" id="Bixref_2012"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.TransactionEditPart" id="Transaction_2008"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.TranscommitEditPart" id="Transcommit_2009"/>
+         <object class="com.sunsheen.jfids.studio.wther.diagram.edit.parts.TransrollbackEditPart" id="Transrollback_2010"/>
+         <context elements="Flow_1000,Start_2001,End_2002,Assignment_2003,Custom_2011,Blank_2007,For_2004,If_2005,Call_2006,Bixref_2012,Transaction_2008,Transcommit_2009,Transrollback_2010"/>
+      </modelingAssistantProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
+      <?gmfgen generated="true"?>
+      <IconProvider class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Flow_1000"
+               name="%metatype.name.Flow_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Flow"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.FlowEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Start_2001"
+               name="%metatype.name.Start_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Start"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.StartEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.End_2002"
+               name="%metatype.name.End_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="End"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.EndEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Assignment_2003"
+               name="%metatype.name.Assignment_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Assignment"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.AssignmentEditHelper">
+            <param name="semanticHint" value="2003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Custom_2011"
+               name="%metatype.name.Custom_2011"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Custom"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.CustomEditHelper">
+            <param name="semanticHint" value="2011"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Blank_2007"
+               name="%metatype.name.Blank_2007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Blank"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.BlankEditHelper">
+            <param name="semanticHint" value="2007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.For_2004"
+               name="%metatype.name.For_2004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="For"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.ForEditHelper">
+            <param name="semanticHint" value="2004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.If_2005"
+               name="%metatype.name.If_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="If"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.IfEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Call_2006"
+               name="%metatype.name.Call_2006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Call"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.CallEditHelper">
+            <param name="semanticHint" value="2006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Bixref_2012"
+               name="%metatype.name.Bixref_2012"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Bixref"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.BixrefEditHelper">
+            <param name="semanticHint" value="2012"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Transaction_2008"
+               name="%metatype.name.Transaction_2008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Transaction"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.TransactionEditHelper">
+            <param name="semanticHint" value="2008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Transcommit_2009"
+               name="%metatype.name.Transcommit_2009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Transcommit"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.TranscommitEditHelper">
+            <param name="semanticHint" value="2009"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.Transrollback_2010"
+               name="%metatype.name.Transrollback_2010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Transrollback"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.TransrollbackEditHelper">
+            <param name="semanticHint" value="2010"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <specializationType
+               id="com.sunsheen.jfids.studio.wther.diagram.NodeLink_4001"
+               name="%metatype.name.NodeLink_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4001"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <specializationType
+               id="com.sunsheen.jfids.studio.wther.diagram.EntityExceptionlink_4007"
+               name="%metatype.name.EntityExceptionlink_4007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4007"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <specializationType
+               id="com.sunsheen.jfids.studio.wther.diagram.IfElselink_4002"
+               name="%metatype.name.IfElselink_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4002"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <specializationType
+               id="com.sunsheen.jfids.studio.wther.diagram.ForEndlink_4003"
+               name="%metatype.name.ForEndlink_4003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <specializationType
+               id="com.sunsheen.jfids.studio.wther.diagram.EntityBreak_4006"
+               name="%metatype.name.EntityBreak_4006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4006"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://logic">
+         <metamodelType
+               id="com.sunsheen.jfids.studio.wther.diagram.IfLink_4004"
+               name="%metatype.name.IfLink_4004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="IfLink"
+               edithelper="com.sunsheen.jfids.studio.wther.diagram.edit.helpers.IfLinkEditHelper">
+            <param name="semanticHint" value="4004"/>
+         </metamodelType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="com.sunsheen.jfids.studio.wther.diagram.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="com.sunsheen.jfids.studio.wther.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="com.sunsheen.jfids.studio.wther.diagram.TypeContext">
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Flow_1000"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Start_2001"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.End_2002"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Assignment_2003"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Custom_2011"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Blank_2007"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.For_2004"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.If_2005"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Call_2006"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Bixref_2012"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Transaction_2008"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Transcommit_2009"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.Transrollback_2010"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.NodeLink_4001"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.EntityExceptionlink_4007"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.IfElselink_4002"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.ForEndlink_4003"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.EntityBreak_4006"/>
+         <elementType ref="com.sunsheen.jfids.studio.wther.diagram.IfLink_4004"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isURIEditorInput">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="com.sunsheen.jfids.studio.wther.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="com.sunsheen.jfids.studio.wther.diagram"
+           properties="isURIEditorInput"
+           class="com.sunsheen.jfids.studio.wther.diagram.part.LogicUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="com.sunsheen.jfids.studio.wther.diagram.resourceContent"/>
+			<contentExtension pattern="com.sunsheen.jfids.studio.wther.diagram.domainResourceContent"/>
+            <contentExtension pattern="com.sunsheen.jfids.studio.wther.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="com.sunsheen.jfids.studio.wther.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="com.sunsheen.jfids.studio.wther.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicNavigatorContentProvider" 
+            labelProvider="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicNavigatorLabelProvider"
+            icon="icons/obj16/LogicDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="wth"/>
+               </and>
+               <instanceof value="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicAbstractNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicAbstractNavigatorItem"/>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="com.sunsheen.jfids.studio.wther.diagram.navigatorSorter" 
+               class="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="wth"/>
+                  </and>
+                  <instanceof value="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="com.sunsheen.jfids.studio.wther.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicDomainNavigatorContentProvider" 
+            labelProvider="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicDomainNavigatorLabelProvider"
+            icon="icons/obj16/LogicDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="logic"/>
+               </and>
+               <instanceof value="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="com.sunsheen.jfids.studio.wther.diagram.navigatorActionProvider"
+            class="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicAbstractNavigatorItem"/>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="com.sunsheen.jfids.studio.wther.diagram.navigatorLinkHelper"
+            class="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="com.sunsheen.jfids.studio.wther.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="com.sunsheen.jfids.studio.wther.diagram.navigator.LogicAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands" id="update-cmd">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="com.sunsheen.jfids.studio.wther.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="com.sunsheen.jfids.studio.wther.diagram.updateDiagram"
+         contextId="com.sunsheen.jfids.studio.wther.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
+      <?gmfgen generated="false"?>
+      <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
+      </menuContribution>
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=">
+      </menuContribution -->
+      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <command commandId="com.sunsheen.jfids.studio.wther.diagram.LoadResourceAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="com.sunsheen.jfids.studio.wther.diagram.edit.parts.FlowEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+         <command commandId="com.sunsheen.jfids.studio.wther.diagram.ShowReferenceBixAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="com.sunsheen.jfids.studio.wther.diagram.edit.parts.BixrefEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+         <!--
+         <command commandId="com.sunsheen.jfids.studio.wther.diagram.SetTryAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+         -->
+         <command commandId="com.sunsheen.jfids.studio.wther.diagram.RefreshVarAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="com.sunsheen.jfids.studio.wther.diagram.edit.parts.FlowEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+         
+         <command commandId="com.sunsheen.jfids.studio.wther.diagram.GetInfoAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="com.sunsheen.jfids.studio.wther.diagram.edit.parts.FlowEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+         
+      </menuContribution>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
+      <?gmfgen generated="true"?>
+      <category id="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <command id="com.sunsheen.jfids.studio.wther.diagram.ShowReferenceBixAction"
+         name="打开引用文件"
+         categoryId="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/>
+      <command id="com.sunsheen.jfids.studio.wther.diagram.GetInfoAction"
+         name="复制基本信息"
+         categoryId="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/>
+      <command id="com.sunsheen.jfids.studio.wther.diagram.RefreshVarAction"
+         name="刷新变量"
+         categoryId="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/>
+      <command id="com.sunsheen.jfids.studio.wther.diagram.LoadResourceAction"
+         name="Load Resource"
+         categoryId="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"
+         defaultHandler="com.sunsheen.jfids.studio.wther.diagram.part.LoadResourceAction"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
+      <?gmfgen generated="true"?>
+      <handler
+         commandId="com.sunsheen.jfids.studio.wther.diagram.ShowReferenceBixAction"
+         class="com.sunsheen.jfids.studio.wther.diagram.part.ShowReferenceBixAction">
+         <enabledWhen>
+           <with variable="activePartId"><equals value="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/></with>
+         </enabledWhen>
+      </handler>
+      <handler
+         commandId="com.sunsheen.jfids.studio.wther.diagram.GetInfoAction"
+         class="com.sunsheen.jfids.studio.wther.diagram.part.GetInfoAction">
+         <enabledWhen>
+           <with variable="activePartId"><equals value="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/></with>
+         </enabledWhen>
+      </handler>
+      <handler
+         commandId="com.sunsheen.jfids.studio.wther.diagram.RefreshVarAction"
+         class="com.sunsheen.jfids.studio.wther.diagram.part.RefreshVarAction">
+         <enabledWhen>
+           <with variable="activePartId"><equals value="com.sunsheen.jfids.studio.wther.diagram.part.LogicDiagramEditorID"/></with>
+         </enabledWhen>
+      </handler>
+   </extension>
+<extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicMarkerNavigationProvider">
+         <MarkerType name="com.sunsheen.jfids.studio.wther.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+<extension id="diagnostic" name="Logic Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension><extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicValidationDecoratorProvider">
+         <Priority name="Medium"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
+<extension point="org.eclipse.emf.validation.constraintProviders">
+      <?gmfgen generated="true"?>
+            <category id="pixAuditId" mandatory="false" name="pixAuditName">
+         <![CDATA[页面逻辑校验]]>
+      </category>
+      <constraintProvider cache="true">
+         <package namespaceUri="http://logic"/>
+               <constraints categories="pixAuditId">
+                  <constraint id="nodeMustBeConnectedId"
+            lang="Java" class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicValidationProvider$Adapter1"
+            name="nodeMustBeConnectedName"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[图中存在孤立节点，请检查连接]]></description>
+            <message><![CDATA[节点【{0}】{1}]]></message>
+            <target class="logic.Node"/>
+         </constraint>
+                  <constraint id="assignmentNodeNoArgId"
+            lang="Java" class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicValidationProvider$Adapter2"
+            name="assignmentNodeNoArgName"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[赋值节点需要设置参数值]]></description>
+            <message><![CDATA[赋值节点【{0}】{1}]]></message>
+            <target class="logic.Assignment"/>
+         </constraint>
+                  <constraint id="ifNodeMustHaveElselinkId"
+            lang="Java" class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicValidationProvider$Adapter3"
+            name="ifNodeMustHaveElselinkName"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[对判断节点的验证]]></description>
+            <message><![CDATA[判断节点【{0}】{1}，请检查]]></message>
+            <target class="logic.If"/>
+         </constraint>
+                  <constraint id="checkStartAndEndNoteId"
+            lang="OCL"
+            name="checkStartAndEndNoteName"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            <![CDATA[self.nodes->select(n | n.oclIsTypeOf(Start))->size()=1 and self.nodes->select(n | n.oclIsTypeOf(End))->size()=1]]>
+            <description><![CDATA[流程中要有一个开始节点和一个结束结点]]></description>
+            <message><![CDATA[流程中要有一个开始节点和一个结束结点]]></message>
+            <target class="logic.Flow"/>
+         </constraint>
+                  <constraint id="noConnectEachOtherId"
+            lang="Java" class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicValidationProvider$Adapter5"
+            name="noConnectEachOtherName"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[流程节点之间不能彼此相互连接，以及开始和结束节点的判断]]></description>
+            <message><![CDATA[{0}，请检查]]></message>
+            <target class="logic.Flow"/>
+         </constraint>
+                  <constraint id="noMoreLinksId"
+            lang="OCL"
+            name="noMoreLinksName"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            <![CDATA[self.link->size()<2]]>
+            <description><![CDATA[节点不能有两个或以上连出线]]></description>
+            <message><![CDATA[节点连出线过多，请检查]]></message>
+            <target class="logic.Node"/>
+         </constraint>
+                  <constraint id="forNodeCheckId"
+            lang="Java" class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicValidationProvider$Adapter7"
+            name="forNodeCheckName"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[检查循环节点连线]]></description>
+            <message><![CDATA[节点【{0}】{1}，请检查]]></message>
+            <target class="logic.For"/>
+         </constraint>
+                  <constraint id="bixCallNodeCheckId"
+            lang="Java" class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicValidationProvider$Adapter8"
+            name="bixCallNodeCheckName"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[检查调用节点设置]]></description>
+            <message><![CDATA[节点【{0}】{1}，请检查]]></message>
+            <target class="logic.BixCall"/>
+         </constraint>
+                  </constraints>
+      </constraintProvider>
+   </extension>
+
+<extension point="org.eclipse.emf.validation.constraintBindings">
+      <?gmfgen generated="true"?>
+      <clientContext default="false" id="com.sunsheen.jfids.studio.wther.diagramDefaultCtx">
+         <selector class="com.sunsheen.jfids.studio.wther.diagram.providers.LogicValidationProvider$DefaultCtx"/>
+      </clientContext>
+      <binding context="com.sunsheen.jfids.studio.wther.diagramDefaultCtx">
+                  <constraint ref="com.sunsheen.jfids.studio.wther.diagram.nodeMustBeConnectedId"/>
+                  <constraint ref="com.sunsheen.jfids.studio.wther.diagram.assignmentNodeNoArgId"/>
+                  <constraint ref="com.sunsheen.jfids.studio.wther.diagram.ifNodeMustHaveElselinkId"/>
+                  <constraint ref="com.sunsheen.jfids.studio.wther.diagram.checkStartAndEndNoteId"/>
+                  <constraint ref="com.sunsheen.jfids.studio.wther.diagram.noConnectEachOtherId"/>
+                  <constraint ref="com.sunsheen.jfids.studio.wther.diagram.noMoreLinksId"/>
+                  <constraint ref="com.sunsheen.jfids.studio.wther.diagram.forNodeCheckId"/>
+                  <constraint ref="com.sunsheen.jfids.studio.wther.diagram.bixCallNodeCheckId"/>
+               </binding>
+
+   </extension>
+<extension
+      point="org.eclipse.ui.views">
+        <view
+            category="com.sunsheen.studio.web.categoryjfids"
+            class="com.sunsheen.jfids.studio.wther.diagram.component.views.JavaComponentView"
+            icon="icons/java.png"
+            id="com.sunsheen.jfids.studio.wther.diagram.compiler.views.JavaComponentView"
+            name="%views.javaCompView"
+            restorable="true">
+      </view>
+        <view
+              category="com.sunsheen.studio.web.categoryjfids"
+              class="com.sunsheen.jfids.studio.wther.diagram.testcase.view.LogicTestViewPart"
+              icon="icons/box.png"
+              id="com.sunsheen.jfids.studio.wther.diagram.testcase.TestView"
+              name="业务逻辑测试"
+              restorable="true">
+        </view>
+</extension>
+<extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/LogicDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="com.sunsheen.jfids.studio.wther.diagram.part.LogicCreationWizard"
+  	     id="com.sunsheen.jfids.studio.wther.diagram.part.LogicCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+<extension
+      point="com.sunsheen.jfids.studio.run.resourceCaches">
+   <resourceCache
+         class="com.sunsheen.jfids.studio.wther.diagram.compiler.util.ErrorRecordsUtils"
+         id="com.sunsheen.jfids.studio.wther.diagram.errorrecords">
+   </resourceCache>
+</extension>
+
+
+<extension
+      point="com.sunsheen.jfids.studio.run.newActions">
+   <action
+         class="com.sunsheen.jfids.studio.wther.diagram.creation.NewWeatherAction"
+         index="1">
+   </action>
+
+   <action
+         class="com.sunsheen.jfids.studio.wther.diagram.creation.NewBixAction"
+         index="1">
+   </action>
+</extension>
+
+
+<extension
+      point="com.sunsheen.jfids.studio.run.resourceDescriptors">
+   <resource
+         compilerFactory="com.sunsheen.jfids.studio.wther.diagram.compiler.BixCompilerFactory"
+         extensions="wth"
+         src="true"
+         type="RESOURCES">
+   </resource>
+   <resource
+         compilerFactory="com.sunsheen.jfids.studio.wther.diagram.compiler.BglbCompilerFactory"
+         extensions="bglb"
+         src="true"
+         type="RESOURCES">
+   </resource>
+</extension>
+<extension
+      point="org.eclipse.ui.popupMenus">
+   <objectContribution
+         adaptable="true"
+         id="com.sunsheen.jfids.studio.wther.diagram.generate"
+         objectClass="org.eclipse.core.resources.IProject">
+         <action
+				menubarPath="com.sunsheen.jfids.studio.web.popupMenus.hearkenProject/hearken"
+				icon="icons/tools/businesscomplib.png" class="com.sunsheen.jfids.studio.wther.diagram.action.GenerateCustomBusinessLogicAction"
+				id="com.sunsheen.jfids.studio.web.popup.actions.GenerateCustomBusinessLogicAction"
+				label="生成自定义业务逻辑流构件">
+			</action>
+   </objectContribution>
+</extension>
+
+</plugin>

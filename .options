@@ -1,0 +1,7 @@
+# Tracing options for the com.sunsheen.jfids.studio.wther.diagram plug-in
+
+# Common issues
+com.sunsheen.jfids.studio.wther.diagram/debug=false
+
+# Visual IDs
+com.sunsheen.jfids.studio.wther.diagram/debug/visualID=false

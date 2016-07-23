@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- tabFolder title="方法配置" message="配置'方法'信息" titleImg="icons/obj48/comp_48.png" height="550" -->
+<tabFolder title="构件配置" message="构件配置详细信息"
+	titleImg="icons/titleImg.png"
+	onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.CallDlgListener"
+	validate="com.sunsheen.jfids.studio.wther.diagram.dialog.validator.CallDlgValidator">
+
+<button id="0" name="确定"></button>
+<button id="1" name="取消"></button>
+	<tab name="设置" >
+			<label text="逻辑构件"></label>
+		    <text key="bixfile" enable="false">
+		    	<gridData method="setLayoutData" methodArg="java.lang.Object" 	horizontalAlignment="FILL" verticalAlignment="FILL"
+				 	grabExcessHorizontalSpace="true" />
+			</text>
+			<!-- button text="浏览" key="bixBrowser" onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.CallButtonListener"/ -->
+		<table id="table" title="变量定义：" contentProvider="config.ContentProvider" key="table" mergeHead="true" 
+				 onMouseDown="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.CallTableListener">
+			#if ($showbar == "true") 
+		    <toolbar name="扩展工具栏">
+				<toolbaritem name="add_variadic" key="addVariadicItem" toolTipText="添加参数" group="0"
+					icons="icons/add_correction.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.VariadicAddListener"></toolbaritem>
+				<toolbaritem name="del_variadic" key="delVariadicItem" toolTipText="删除参数" group="0"
+					icons="icons/remove_correction.gif"
+					onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.listener.VariadicAddListener"></toolbaritem>
+			</toolbar>
+			#end
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"  horizontalSpan="2"/>
+		    <head>
+	           <td index="0" width="50" edit="false" name="title1" title="分类" render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.TypeTextCellRenderer"/>
+	           <td index="1" width="80" edit="false"  name="title2" title="数据类型" render="com.sunsheen.jfids.studio.wther.diagram.dialog.renderers.TypeTextCellRenderer"/>
+	           <td index="2" width="80" edit="false"  name="title2" title="数据名"/>
+	           <td index="3" width="80" edit="true"  name="title2" title="值" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.VarTextCellEditor"/>
+	           <td index="4" width="80" edit="true"  name="title2" title="值类型" cellEditor="com.sunsheen.jfids.studio.wther.diagram.dialog.editor.ValueTypeComboBoxCellEditor"/>
+	           <td index="5" width="158" edit="false"  name="title2" title="描述"/>
+	           <!-- td index="6" width="0" edit="false"  name="title2" title="提示"/ -->
+		    </head>
+		</table>
+		<label text="" key="tiplabel">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" horizontalSpan="2"/>
+		</label>
+		<!-- 
+		<checkbox text="前台是否可调用" key="remote">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL"/>
+		</checkbox>
+		 -->
+	</tab>
+	
+	<tab name="描述" icon="icons/computer.png">
+		<label text="节点名">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL"/>
+		</label>
+		<text key="nodename">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true"/>
+		</text>
+		<label text="描述">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="VERTICAL_ALIGN_END"/>
+		</label>
+		<text key="comment" multi="true" linefeed="auto">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"/>
+		</text>
+	</tab>
+</tabFolder>

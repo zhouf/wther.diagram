@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabFolder title="实体选择" message="选择实体信息" width="600" height="450" onClick="com.sunsheen.jfids.studio.wther.diagram.dialog.popup.listener.SelectBeanOKListener" resize="true">
+<button id="0" name="确定"></button>
+<button id="1" name="取消"></button>
+	<tab name="实体Bean选择" icon="icons/computer.png" cols="1">
+		<label text="通配符(?=任意字符,*= 任意字符串):" >
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" />
+		</label>
+		<text key="beanName" onChange="com.sunsheen.jfids.studio.wther.diagram.dialog.popup.listener.BeanTypeOnChange" focus="true">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" grabExcessHorizontalSpace="true" horizontalSpan="2"/>
+		</text>
+		<label text="匹配结果:">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" />
+		</label>
+		<select key="show" onPaint="com.sunsheen.jfids.studio.wther.diagram.dialog.popup.listener.BeanTypeOnChange" onSelected="com.sunsheen.jfids.studio.wther.diagram.dialog.popup.listener.OnBeanSelected" DBClick="com.sunsheen.jfids.studio.wther.diagram.dialog.popup.listener.BeanDBClick">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" verticalAlignment="FILL"
+				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"/>
+		</select>
+		<label text="" key="showText">
+			<gridData method="setLayoutData" methodArg="java.lang.Object" horizontalAlignment="FILL" />
+		</label>
+	</tab>
+
+</tabFolder>
